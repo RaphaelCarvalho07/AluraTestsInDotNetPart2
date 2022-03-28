@@ -9,15 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
     public class AgenciaRepositorioTestes
     {
         private readonly IAgenciaRepositorio _repositorio;
+        public ITestOutputHelper SaidaConsoleTeste { get; set; }
 
-        public AgenciaRepositorioTestes()
+        public AgenciaRepositorioTestes(ITestOutputHelper _saidaConsoleTeste)
         {
+            SaidaConsoleTeste = _saidaConsoleTeste;
+            SaidaConsoleTeste.WriteLine("Construtor Executado com Sucesso!");
+
             //Injetando dependências no construtor;
             var servico = new ServiceCollection();
             servico.AddTransient<IAgenciaRepositorio, AgenciaRepositorio>();
@@ -104,19 +109,19 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             //Assert
             Assert.True(atualizado);
         }
-        [Fact(Skip = "Teste Falhando")]
+        [Fact/*(Skip = "Teste Falhando")*/]
         public void TestaRemoverInformacaoDeterminadaAgencia()
         {
             //Arrange
             //Act
-            var atualizado = _repositorio.Excluir(3);
+            var atualizado = _repositorio.Excluir(13);
 
             //Assert
             Assert.True(atualizado);
         }
 
         //Exceções
-        [Fact (Skip = "Teste Falhando")]
+        [Fact/*(Skip = "Teste Falhando")*/]
         public void TestaExcecaoConsultaPorAgenciaPorId()
         {
 
