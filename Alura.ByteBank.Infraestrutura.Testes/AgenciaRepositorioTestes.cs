@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
@@ -31,7 +30,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
         [Fact]
         public void TestaObterTodasAgencias()
         {
-            //Arrange        
+            //Arrange         
 
             //Act
             List<Agencia> lista = _repositorio.ObterTodos();
@@ -105,8 +104,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             //Assert
             Assert.True(atualizado);
         }
-
-        [Fact(Skip = "Teste está falhando")]
+        [Fact(Skip = "Teste Falhando")]
         public void TestaRemoverInformacaoDeterminadaAgencia()
         {
             //Arrange
@@ -117,27 +115,42 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             Assert.True(atualizado);
         }
 
-
         //Exceções
-        [Fact(Skip = "Teste está falhando")]
+        [Fact (Skip = "Teste Falhando")]
         public void TestaExcecaoConsultaPorAgenciaPorId()
         {
 
             //Act     
             //Assert
-            Assert.Throws<FormatException>(
+            Assert.Throws<Exception>(
                 () => _repositorio.ObterPorId(33)
              );
 
         }
 
+
+        // Testes com Mock
         [Fact]
-        public void TestaAdicionarAgenciaMock()
+        public void TestaObterAgenciasMock()
+        {
+            //Arange
+            var bytebankRepositorioMock = new Mock<IByteBankRepositorio>();
+            var mock = bytebankRepositorioMock.Object;
+
+            //Act
+            var lista = mock.BuscarAgencias();
+
+            //Assert
+            bytebankRepositorioMock.Verify(b => b.BuscarAgencias());
+        }
+
+        [Fact]
+        public void TestaAdiconarAgenciaMock()
         {
             // Arrange
             var agencia = new Agencia()
             {
-                Nome = "Agência Maral",
+                Nome = "Agência Amaral",
                 Identificador = Guid.NewGuid(),
                 Id = 4,
                 Endereco = "Rua Arthur Costa",
@@ -146,25 +159,11 @@ namespace Alura.ByteBank.Infraestrutura.Testes
 
             var repositorioMock = new ByteBankRepositorio();
 
-            // Act
+            //Act
             var adicionado = repositorioMock.AdicionarAgencia(agencia);
 
-            // Assert
+            //Assert
             Assert.True(adicionado);
-        }
-
-        [Fact]
-        public void TestaObterAgenciasMock()
-        {
-            // Arrange
-            var bytebankRepositorioMock = new Mock<IByteBankRepositorio>();
-            var mock = bytebankRepositorioMock.Object;
-
-            // Act
-            var lista = mock.BuscarAgencias();
-
-            // Assert
-            bytebankRepositorioMock.Verify(b => b.BuscarAgencias());
         }
     }
 }

@@ -87,7 +87,6 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             //Assert
             Assert.True(retorno);
 
-
         }
 
         [Fact]
@@ -104,6 +103,22 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             //Assert
             Assert.True(atualizado);
         }
+
+        // Testes com Mock
+        [Fact]
+        public void TestaObterClientesMock()
+        {
+            //Arange
+            var bytebankRepositorioMock = new Mock<IByteBankRepositorio>();
+            var mock = bytebankRepositorioMock.Object;
+
+            //Act
+            var lista = mock.BuscarClientes();
+
+            //Assert
+            bytebankRepositorioMock.Verify(b => b.BuscarClientes());
+        }
+
 
     }
 }

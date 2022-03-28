@@ -112,7 +112,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             }
         };
 
-        public List<ContaCorrente> Contas { get { return contas; } }
+        public List<ContaCorrente> Contas{get { return contas; }}
 
         public bool AdicionarConta(ContaCorrente conta)
         {
@@ -126,7 +126,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
 
                 return false;
             }
-
+            
         }
 
         public bool AdicionarAgencia(Agencia agencia)
@@ -141,7 +141,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
 
                 return false;
             }
-
+            
         }
 
         public bool AdicionarCliente(Cliente cliente)
@@ -156,7 +156,7 @@ namespace Alura.ByteBank.Infraestrutura.Testes
 
                 return false;
             }
-
+            
         }
 
         public List<Agencia> BuscarAgencias()
@@ -173,6 +173,6 @@ namespace Alura.ByteBank.Infraestrutura.Testes
         {
             return this.Contas;
         }
-
+      
     }
 }
